@@ -7,4 +7,9 @@ class CellTest < Minitest::Test
     cell = Cell.new
     assert_instance_of Cell, cell
   end
+
+  def test_it_has_no_ship_by_default
+    cell = Cell.new
+    refute cell.ship
+  end
 end

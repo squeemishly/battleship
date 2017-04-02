@@ -1,4 +1,5 @@
 require './lib/cell'
+require 'pry'
 
 class Ocean
   attr_reader :gameboard,
@@ -24,4 +25,6 @@ class Ocean
       end
     end
   end
+
+
 end

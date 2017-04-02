@@ -1,9 +1,9 @@
 require 'pry'
 
 class Cell
-  attr_reader
+  attr_reader :ship
   def initialize
-
+    @ship = nil
   end
 end
 
