@@ -1,12 +1,11 @@
 require 'pry'
 
 class Cell
-  attr_reader :x, :y
-  def initialize(x, y)
-    @x = x
-    @y = y
+  attr_reader
+  def initialize
+
   end
 end
 
-binding.pry
-""
+# binding.pry
+# ""
