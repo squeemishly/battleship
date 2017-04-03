@@ -1,9 +1,14 @@
 require 'pry'
 
 class Cell
-  attr_reader :ship
+  attr_reader :status
+
   def initialize
-    @ship = nil
+    @status = "empty"
+  end
+
+  def free?
+    status == "empty"
   end
 end
 
