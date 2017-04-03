@@ -15,7 +15,7 @@ class ComputerBoardTest < Minitest::Test
     assert_instance_of Ocean, @board.ocean
   end
 
-  def test_it_can_validate_a_ship_placement
+  def test_it_can_validate_ship_placement
     assert @board.validate_ship_placement("A1", "A2")
     refute @board.validate_ship_placement("A1", "B3")
   end

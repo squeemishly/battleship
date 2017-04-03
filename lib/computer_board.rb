@@ -19,6 +19,7 @@ class ComputerBoard
   def validate_ship_placement(cell1, cell2)
     ocean.neighbors(ocean.find_cell(cell1), ocean.find_cell(cell2))
   end
+  
 end
 
 board = ComputerBoard.new
