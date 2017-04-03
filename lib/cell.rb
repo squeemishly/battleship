@@ -1,8 +1,8 @@
 require 'pry'
 
 class Cell
-  attr_reader :status
-  attr_accessor :name
+  attr_accessor :name,
+                :status
 
   def initialize
     @status = "empty"

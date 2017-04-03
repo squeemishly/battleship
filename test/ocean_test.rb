@@ -33,6 +33,7 @@ class OceanTest < Minitest::Test
   end
 
   def test_cells_in_the_ocean_can_have_cell_addresses
+    @ocean = Ocean.new
     @ocean.add_column_headers
     @ocean.make_grid
     @ocean.cellify
@@ -42,7 +43,16 @@ class OceanTest < Minitest::Test
     assert_equal "B3", @ocean.gameboard[2][2].name
   end
 
+  def test_it_can_find_the_cell_given_the_cell_name
+    @ocean.add_column_headers
+    @ocean.make_grid
+    @ocean.cellify
+    @ocean.namify
+    assert_equal @ocean.gameboard[1][0], @ocean.find_cell("A1")
+  end
+
   def test_it_can_tell_which_cells_are_neighbors
+    @ocean = Ocean.new
     @ocean.add_column_headers
     @ocean.make_grid
     @ocean.cellify

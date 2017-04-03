@@ -8,10 +8,6 @@ class Ocean
   def initialize(size = 4)
     @gameboard = []
     @size = size
-    add_column_headers
-    make_grid
-    cellify
-    namify
   end
 
   def add_column_headers
@@ -59,6 +55,28 @@ class Ocean
     end
   end
 
+  def startup
+    add_column_headers
+    make_grid
+    cellify
+    namify
+  end
+
+  def find_cell(cell_name)
+    gameboard.each do |cells|
+      if cells[0] == "A"
+        next
+      else
+        cells.each do |cell|
+          if cell.name == cell_name
+            return cell
+            break
+          end
+        end
+      end
+    end
+  end
+
   def neighbors(cell1, cell2)
     first = cell1.name.chars
     second = cell2.name.chars
@@ -82,12 +100,12 @@ class Ocean
 
 end
 
-# ocean = Ocean.new
-# ocean.add_column_headers
-# ocean.make_grid
-# ocean.cellify
-# ocean.namify
-# ocean.neighbors(ocean.gameboard[1][0], ocean.gameboard[3][0])
+ocean = Ocean.new
+ocean.add_column_headers
+ocean.make_grid
+ocean.cellify
+ocean.namify
+ocean.find_cell("A1")
 #
 # binding.pry
 # ""
