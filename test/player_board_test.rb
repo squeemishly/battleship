@@ -1,14 +1,14 @@
 require 'Minitest/autorun'
 require 'Minitest/pride'
-require './lib/computer_board'
+require './lib/player_board'
 
-class ComputerBoardTest < Minitest::Test
+class PlayerBoardTest < Minitest::Test
   def setup
-    @board = ComputerBoard.new
+    @board = PlayerBoard.new
   end
 
   def test_it_exists
-    assert_instance_of ComputerBoard, @board
+    assert_instance_of PlayerBoard, @board
   end
 
   def test_it_access_the_ocean
@@ -22,10 +22,6 @@ class ComputerBoardTest < Minitest::Test
 
   def test_it_can_place_a_2_piece_ship
     assert_equal "ship", @board.place_2_piece_ship("A1", "A2")
-    refute @board.place_2_piece_ship("A1", "B3")
+    assert_equal "Yo, dummy, that ain't no proper ship placement", @board.place_2_piece_ship("A1", "B3")
   end
-
-  def test_it_can_automate_ship_placement
-  end
-
 end
