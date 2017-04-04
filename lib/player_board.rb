@@ -10,19 +10,6 @@ class PlayerBoard
     ocean.startup
   end
 
-  ### these are helper methods for place_ship
-  def no_nils(cells)
-    cells.find_all do |cell|
-      cell != nil
-    end
-  end
-
-  def convert_to_cells(cell_names)
-    cell_names.map! do |cell|
-      ocean.find_cell(cell)
-    end
-  end
-
   def place_ship(cell1, cell2, cell3 = nil, cell4 = nil, cell5 = nil)
     starter = [cell1, cell2, cell3, cell4, cell5]
     clean_start = no_nils(starter)
@@ -44,6 +31,27 @@ class PlayerBoard
       return "You already have a ship there. Please try again."
     end
   end
+
+  ### these are helper methods for place_ship
+  def no_nils(cells)
+    cells.find_all do |cell|
+      cell != nil
+    end
+  end
+
+  def convert_to_cells(cell_names)
+    cell_names.map! do |cell|
+      ocean.find_cell(cell)
+    end
+  end
+
+end
+
+board = PlayerBoard.new
+
+binding.pry
+""
+
 
   # def place_2_piece_ship(cell1, cell2)
   #   first_cell = ocean.find_cell(cell1)
@@ -80,14 +88,7 @@ class PlayerBoard
   #     "You already have a ship there. Please try again."
   #   end
   # end
-
-  def validate_ship_placement(cell1, cell2)
-    ocean.neighbors(ocean.find_cell(cell1), ocean.find_cell(cell2))
-  end
-
-end
-
-board = PlayerBoard.new
-
-binding.pry
-""
+  #
+  # def validate_ship_placement(cell1, cell2)
+  #   ocean.neighbors(ocean.find_cell(cell1), ocean.find_cell(cell2))
+  # end

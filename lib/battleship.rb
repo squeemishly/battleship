@@ -14,12 +14,12 @@ class Battleship
   def desire
     puts "Do you wanna (p)lay, read the (i)nstructions, or (q)uit?"
     answer = gets.chomp.downcase
-    if answer == "p" || "play"
+    if answer == "p" || answer == "play"
       ###
-    elsif answer == "i" || "instructions"
-      puts instructions
+    elsif answer == "i" || answer == "instructions"
+      instructions
       desire
-    elsif answer == "q" || "quit"
+    elsif answer == "q" || answer == "quit"
       exit
     else
       puts "That is not a valid response"
@@ -28,17 +28,15 @@ class Battleship
   end
 
   def instructions
-    "Blow up the enemy before you get blown up yourself."
+    puts "Blow up the enemy before you get blown up yourself."
+    puts "Press Enter to return to the home screen"
+    gets
   end
 
 end
 
 new_game = Battleship.new
 new_game.welcome
-# new_game.desire
-# binding.pry
-# ""
-
-
-# puts "Would you like to (p)lay, read the (i)nstrutions, or (q)uit?"
-# answer = gets.chomp
+new_game.desire
+binding.pry
+""

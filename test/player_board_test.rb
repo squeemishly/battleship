@@ -15,11 +15,6 @@ class PlayerBoardTest < Minitest::Test
     assert_instance_of Ocean, @board.ocean
   end
 
-  def test_it_can_validate_ship_placement
-    assert @board.validate_ship_placement("A1", "A2")
-    refute @board.validate_ship_placement("A1", "B3")
-  end
-
   def test_it_can_place_a_2_piece_ship
     @board.place_ship("A1", "A2")
     assert_equal "ship", @board.ocean.gameboard[1][0].status
