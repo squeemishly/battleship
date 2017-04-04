@@ -12,6 +12,18 @@ class PlayerBoard
 
   def place_2_piece_ship(cell1, cell2, cell3 = nil, cell4 = nil, cell5 = nil)
     starter = [cell1, cell2, cell3, cell4, cell5]
+    actual = starter.find_all do |cell|
+      cell != nil
+    end
+    actual.each do |cell|
+      cell = ocean.find_cell(cell)
+    end
+    if actual.all? { |cell| cell.free?}
+      # validate_ship_placement..? How this work?
+    else
+      puts "You already have a ship there. Please try again."
+      "You already have a ship there. Please try again."
+    end
   end
 
   # def place_2_piece_ship(cell1, cell2)
