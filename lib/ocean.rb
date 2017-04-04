@@ -87,15 +87,6 @@ class Ocean
     else
       false
     end
-    # gameboard.each_with_index do |arr, index|
-    #   i = 0
-    #   until i = size
-    #     if gameboard[index][i] == cell1
-    #       cell_index = gameboard[index][i]
-    #     end
-    #     i += 1
-    #   end
-    # end
   end
 
 end

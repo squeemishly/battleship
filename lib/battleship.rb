@@ -36,7 +36,7 @@ class Battleship
 end
 
 new_game = Battleship.new
-new_game.welcome
-new_game.desire
-binding.pry
-""
+# new_game.welcome
+# new_game.desire
+# binding.pry
+# ""

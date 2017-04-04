@@ -25,6 +25,17 @@ class ComputerBoardTest < Minitest::Test
     refute @board.place_2_piece_ship("A1", "B3")
   end
 
+  def test_can_generate_random_start
+    assert_instance_of String, @board.random_start
+    assert_equal 2, @board.random_start.length
+  end
+
+  def test_find_a_random_adjacent_cell
+    assert_equal 9, @board.adjacent_cell("A1").length
+  end
+
+  
+
   def test_it_can_automate_ship_placement
   end
 
