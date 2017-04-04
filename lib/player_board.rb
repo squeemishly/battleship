@@ -10,15 +10,25 @@ class PlayerBoard
     ocean.startup
   end
 
-  def place_2_piece_ship(cell1, cell2, cell3 = nil, cell4 = nil, cell5 = nil)
-    starter = [cell1, cell2, cell3, cell4, cell5]
-    actual = starter.find_all do |cell|
+  ### these are helper methods for place_ship
+  def no_nils(cells)
+    cells.find_all do |cell|
       cell != nil
     end
-    actual.each do |cell|
-      cell = ocean.find_cell(cell)
+  end
+
+  def convert_to_cells(cell_names)
+    cell_names.map! do |cell|
+      ocean.find_cell(cell)
     end
-    if actual.all? { |cell| cell.free?}
+  end
+
+  def place_ship(cell1, cell2, cell3 = nil, cell4 = nil, cell5 = nil)
+    starter = [cell1, cell2, cell3, cell4, cell5]
+    clean_start = no_nils(starter)
+    convert_to_cells(clean_start)
+    binding.pry
+    if clean_start.all? { |peg| peg.ocean.cell.free?}
       # validate_ship_placement..? How this work?
     else
       puts "You already have a ship there. Please try again."
@@ -70,5 +80,5 @@ end
 
 board = PlayerBoard.new
 
-# binding.pry
-# ""
+binding.pry
+""
