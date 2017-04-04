@@ -27,12 +27,21 @@ class PlayerBoard
     starter = [cell1, cell2, cell3, cell4, cell5]
     clean_start = no_nils(starter)
     convert_to_cells(clean_start)
-    binding.pry
-    if clean_start.all? { |peg| peg.ocean.cell.free?}
-      # validate_ship_placement..? How this work?
+    if clean_start.all? { |peg| peg.free?}
+      clean_start.each_with_index do |peg, index|
+        if clean_start[index + 1] == nil
+          next
+        else
+          if ocean.neighbors(clean_start[index], clean_start[index + 1])
+            clean_start[index].status = "ship"
+            clean_start[index + 1].status = "ship"
+          else
+            return "Yo, dummy, that ain't no proper ship placement"
+          end
+        end
+      end
     else
-      puts "You already have a ship there. Please try again."
-      "You already have a ship there. Please try again."
+      return "You already have a ship there. Please try again."
     end
   end
 
