@@ -24,5 +24,5 @@ end
 
 board = ComputerBoard.new
 
-# binding.pry
-# ""
+binding.pry
+""
