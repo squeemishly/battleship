@@ -31,10 +31,12 @@ class ComputerBoardTest < Minitest::Test
   end
 
   def test_find_a_random_adjacent_cell
-    assert_equal 9, @board.adjacent_cell("A1").length
+    assert_equal [[64, 0], [64, 1], [64, 2], [65, 0], [65, 1], [65, 2], [66, 0], [66, 1], [66, 2]], @board.adjacent_cell("A1")
   end
 
-  
+  def test_it_knows_which_adjacent_cells_are_valid
+    assert_equal [[65, 1], [65, 2], [66, 1], [66, 2]], @board.validate_options(@board.adjacent_cell("A1"))
+  end
 
   def test_it_can_automate_ship_placement
   end
