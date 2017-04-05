@@ -30,9 +30,16 @@ class ComputerBoard
   def adjacent_cell(start = starting_cell)
     char = start[0].ord
     num = start[1].to_i
-    range_char = (char - 1..char + 1).to_a
-    range_num = (num - 1..num + 1).to_a
-    full_range = range_char.product(range_num)
+    arr = []
+    arr << [(char - 1), num]
+    arr << [(char + 1), num]
+    arr << [char, (num - 1)]
+    arr << [char, (num + 1)]
+    # binding.pry
+    arr
+    # range_char = (char - 1..char + 1).to_a
+    # range_num = (num - 1..num + 1).to_a
+    # full_range = range_char.product(range_num)
   end
 
   def validate_options(range = adjacent_cell)
@@ -42,14 +49,14 @@ class ComputerBoard
     @valid_range
   end
 
-  def remove_starting_cell(range = @valid_range, start = starting_cell)
-    start = start.chars
-    start = [start[0].ord, start[1].to_i]
-    @valid_range = range.reject do |vals|
-      vals == start
-    end
-    @valid_range
-  end
+  # def remove_starting_cell(range = @valid_range, start = starting_cell)
+  #   start = start.chars
+  #   start = [start[0].ord, start[1].to_i]
+  #   @valid_range = range.reject do |vals|
+  #     vals == start
+  #   end
+  #   @valid_range
+  # end
 
   def pick_adjacent_cell
     valid_range.sample
@@ -57,7 +64,9 @@ class ComputerBoard
 
   def merged_adjacent_cell
     pick_adjacent_cell[0] = pick_adjacent_cell[0].chr
-    pick_adjacent_cell.join('')
+    value = pick_adjacent_cell.join('')
+    value
+    # binding.pry
   end
 
   # def place_2_piece_ship(cell1, cell2)
@@ -74,6 +83,8 @@ class ComputerBoard
 end
 
 board = ComputerBoard.new
+board.adjacent_cell
+
 
 # binding.pry
 # ""
