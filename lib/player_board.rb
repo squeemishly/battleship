@@ -32,7 +32,7 @@ class PlayerBoard
     end
   end
 
-  ### these are helper methods for place_ship
+  ### these are helper methods for place_ship. should be private?
   def no_nils(cells)
     cells.find_all do |cell|
       cell != nil
