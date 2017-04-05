@@ -46,12 +46,16 @@ class ComputerBoardTest < Minitest::Test
   end
 
   def test_it_picks_a_random_cell_from_the_valid_cells
-    
+    @board.remove_starting_cell(@board.validate_options(@board.adjacent_cell("A1")), "A1")
+    assert_equal 2, @board.pick_adjacent_cell.length
+    assert_instance_of Array, @board.pick_adjacent_cell
   end
 
 
   def test_it_merges_the_cells_to_valid_addresses
-
+    @board.remove_starting_cell(@board.validate_options(@board.adjacent_cell("A1")), "A1")
+    assert_equal 2, @board.merged_adjacent_cell.length
+    assert_instance_of String, @board.merged_adjacent_cell
   end
 
   def test_it_can_automate_ship_placement

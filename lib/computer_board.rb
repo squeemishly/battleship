@@ -45,10 +45,19 @@ class ComputerBoard
   def remove_starting_cell(range = @valid_range, start = starting_cell)
     start = start.chars
     start = [start[0].ord, start[1].to_i]
-    final_range = range.reject do |vals|
+    @valid_range = range.reject do |vals|
       vals == start
     end
-    final_range
+    @valid_range
+  end
+
+  def pick_adjacent_cell
+    valid_range.sample
+  end
+
+  def merged_adjacent_cell
+    pick_adjacent_cell[0] = pick_adjacent_cell[0].chr
+    pick_adjacent_cell.join('')
   end
 
   # def place_2_piece_ship(cell1, cell2)
