@@ -29,10 +29,8 @@ class Ocean
 
   def cellify
     gameboard.each do |arr|
-      if arr == []
-        size.times do
-          arr << Cell.new
-        end
+      if arr.empty?
+        size.times { arr << Cell.new r}
       else
         next
       end
