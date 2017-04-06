@@ -32,35 +32,34 @@ class ComputerBoardTest < Minitest::Test
   end
 
   def test_find_a_random_adjacent_cell
-    assert_equal [[64, 1], [66, 1], [65, 0], [65, 2]], @board.adjacent_cell("A1")
+    assert_equal [[64, 0], [64, 1], [64, 2], [65, 0], [65, 1], [65, 2], [66, 0], [66, 1], [66, 2]], @board.adjacent_cell("A1")
   end
 
   def test_it_knows_which_adjacent_cells_are_valid
     adjacent_cell = @board.adjacent_cell("A1")
-    assert_equal [[66, 1], [65, 2]], @board.validate_options(adjacent_cell)
+    assert_equal [[65, 1], [65, 2], [66, 1], [66, 2]], @board.validate_options(adjacent_cell)
   end
 
-  # def test_it_removes_values_that_match_the_starting_cell
-  #   # skip
-  #   adjacent_cell = @board.adjacent_cell("A1")
-  #   validate = @board.validate_options(adjacent_cell)
-  #   assert_equal [[65, 2], [66, 1], [66, 2]], @board.remove_starting_cell(validate, "A1")
-  #   assert_equal [[65, 2], [66, 1], [66, 2]], @board.remove_starting_cell([[65, 1], [65, 2], [66, 1], [66, 2]], "A1")
-  # end
+  def test_it_removes_values_that_match_the_starting_cell
+    # skip
+    adjacent_cell = @board.adjacent_cell("A1")
+    validate = @board.validate_options(adjacent_cell)
+    assert_equal [[65, 2], [66, 1], [66, 2]], @board.remove_starting_cell(validate, "A1")
+    assert_equal [[65, 2], [66, 1], [66, 2]], @board.remove_starting_cell([[65, 1], [65, 2], [66, 1], [66, 2]], "A1")
+  end
 
   def test_it_picks_a_random_cell_from_the_valid_cells
     adjacent_cell = @board.adjacent_cell("A1")
     validate = @board.validate_options(adjacent_cell)
-    # @board.remove_starting_cell(validate, "A1")
+    @board.remove_starting_cell(validate, "A1")
     assert_equal 2, @board.pick_adjacent_cell.length
     assert_instance_of Array, @board.pick_adjacent_cell
   end
 
 
   def test_it_merges_the_cells_to_valid_addresses
-    # skip
-    adjacent_cell = @board.adjacent_cell("A1")
-    validate = @board.validate_options(adjacent_cell)
+    skip
+    @board.remove_starting_cell(@board.validate_options(@board.adjacent_cell("A1")), "A1")
     assert_equal 2, @board.merged_adjacent_cell.length
     assert_instance_of String, @board.merged_adjacent_cell
   end

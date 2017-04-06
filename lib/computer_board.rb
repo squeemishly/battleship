@@ -3,8 +3,8 @@ require 'pry'
 
 class ComputerBoard
   attr_reader :ocean,
-              :starting_cell
-  attr_accessor :valid_range
+              :starting_cell,
+              :valid_range
 
   def initialize
     @ocean = Ocean.new
@@ -21,12 +21,6 @@ class ComputerBoard
     result = char  + num
   end
 
-  def convert_to_letters(range)
-    range.map! do |val|
-      val.chr
-    end
-  end
-
   def adjacent_cell(start = starting_cell)
     char = start[0].ord
     num = start[1].to_i
@@ -35,28 +29,15 @@ class ComputerBoard
     arr << [(char + 1), num]
     arr << [char, (num - 1)]
     arr << [char, (num + 1)]
-    # binding.pry
     arr
-    # range_char = (char - 1..char + 1).to_a
-    # range_num = (num - 1..num + 1).to_a
-    # full_range = range_char.product(range_num)
   end
 
   def validate_options(range = adjacent_cell)
     @valid_range = range.find_all do |vals|
-      vals[0] >= 65 && vals[1] >= 1 ### add in that it can't be starting cell
+      vals[0] >= 65 && vals[1] >= 1
     end
     @valid_range
   end
-
-  # def remove_starting_cell(range = @valid_range, start = starting_cell)
-  #   start = start.chars
-  #   start = [start[0].ord, start[1].to_i]
-  #   @valid_range = range.reject do |vals|
-  #     vals == start
-  #   end
-  #   @valid_range
-  # end
 
   def pick_adjacent_cell
     valid_range.sample
@@ -65,20 +46,7 @@ class ComputerBoard
   def merged_adjacent_cell
     pick_adjacent_cell[0] = pick_adjacent_cell[0].chr
     value = pick_adjacent_cell.join('')
-    value
-    # binding.pry
   end
-
-  # def place_2_piece_ship(cell1, cell2)
-  #   if validate_ship_placement(cell1, cell2)
-  #     ocean.find_cell(cell1).status = "ship"
-  #     ocean.find_cell(cell2).status = "ship"
-  #   end
-  # end
-
-  # def validate_ship_placement(cell1, cell2)
-  #   ocean.neighbors(ocean.find_cell(cell1), ocean.find_cell(cell2))
-  # end
 
 end
 
