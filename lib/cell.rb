@@ -13,6 +13,3 @@ class Cell
     status == "empty"
   end
 end
-
-# binding.pry
-# ""

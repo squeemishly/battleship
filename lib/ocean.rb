@@ -92,11 +92,3 @@ class Ocean
 end
 
 ocean = Ocean.new
-ocean.add_column_headers
-ocean.make_grid
-ocean.cellify
-ocean.namify
-ocean.find_cell("A1")
-#
-# binding.pry
-# ""

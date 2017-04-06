@@ -1,3 +1,4 @@
+require './lib/game'
 require 'pry'
 
 class Battleship
@@ -5,6 +6,7 @@ class Battleship
   def initialize
     puts welcome
     desire
+    new_game = Game.new
   end
 
   def welcome
@@ -15,7 +17,7 @@ class Battleship
     puts "Do you wanna (p)lay, read the (i)nstructions, or (q)uit?"
     answer = gets.chomp.downcase
     if answer == "p" || answer == "play"
-      ###
+      new_game
     elsif answer == "i" || answer == "instructions"
       instructions
       desire
@@ -36,7 +38,5 @@ class Battleship
 end
 
 new_game = Battleship.new
-# new_game.welcome
-# new_game.desire
-# binding.pry
-# ""
+new_game.welcome
+new_game.desire
