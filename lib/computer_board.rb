@@ -3,17 +3,18 @@ require 'pry'
 
 class ComputerBoard
   attr_reader :ocean,
-              # :starting_cell,
               :valid_range,
-              :ship_range
+              :ship_range,
+              :ship
 
   def initialize
     @ocean = Ocean.new
     ocean.startup
-    # @starting_cell = random_start
-    @ship_range = []
     @char = nil
     @num = nil
+    @ship_size = nil
+    @ship_range = []
+    @ship = nil
   end
 
 ############ move the finding cells to it's own class? maybe just validating in its own class?
@@ -25,21 +26,23 @@ class ComputerBoard
   end
 
   def determine_direction
-    if @char == 65
-      direction = ["E", "S", "W"].sample
-    elsif @num == 1
-      direction = ["N", "E", "S"].sample
-    elsif @char == (64 + ocean.size)
-      direction = ["N", "E", "W"].sample
-    elsif @num == ocean.size
-      direction = ["N", "E", "S"].sample
-    else
-      direction = ["N", "E", "S", "W"].sample
-    end
-    direction
+    # if @char == 65
+    #   direction = ["E", "S", "W"].sample
+    # elsif @num == 1
+    #   direction = ["N", "E", "S"].sample
+    # elsif @char == (64 + ocean.size)
+    #   direction = ["N", "E", "W"].sample
+    # elsif @num == ocean.size
+    #   direction = ["N", "E", "S"].sample
+    # else
+    #   direction = ["N", "E", "S", "W"].sample
+    # end
+    # direction
+    ["N", "E", "S", "W"].sample
   end
 
   def adjacent_cell(shipsize = 2)
+    @ship_size = shipsize
     direction = determine_direction
     shipsize -=1
     while shipsize > 0
@@ -57,7 +60,22 @@ class ComputerBoard
     ship_range
   end
 
+  def create_ship
+    @ship = [[[@char, @num]], ship_range].flatten(1)
+  end
 
+  def validate_cells
+    ship.each do |peg|
+      if peg[0] < 65 || peg[0] > (64 + ocean.size) || peg[1] < 1 || peg[1] > ocean.size
+        @ship_range = nil
+        @ship = nil
+        adjacent_cell(@ship_size)
+        create_ship
+      end
+    end
+    binding.pry
+    ship
+  end
 
   # def validate_options(range = adjacent_cell)
   #   @valid_range = range.find_all do |vals|

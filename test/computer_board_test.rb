@@ -40,6 +40,27 @@ class ComputerBoardTest < Minitest::Test
     assert_equal 2, @board.ship_range.length
   end
 
+  def test_it_can_merge_starting_cell_and_adjacent_cells
+    @board.random_start
+    @board.adjacent_cell
+    assert_instance_of Array, @board.create_ship
+    assert_equal 2, @board.create_ship.length
+  end
+
+  def test_it_can_make_a_3_peg_boat
+    @board.random_start
+    @board.adjacent_cell(3)
+    assert_instance_of Array, @board.create_ship
+    assert_equal 3, @board.create_ship.length
+  end
+
+  def test_it_can_validate_that_all_cells_are_on_the_board
+    @board.random_start
+    @board.adjacent_cell(3)
+    @board.create_ship
+    assert_equal "", @board.validate_cells
+  end
+
   # def test_it_knows_which_adjacent_cells_are_valid
   #   adjacent_cell = @board.adjacent_cell(2, "A1")
   #   assert_equal [[65, 1], [65, 2], [66, 1], [66, 2]], @board.validate_options(adjacent_cell)
