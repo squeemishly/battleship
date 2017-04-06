@@ -21,6 +21,11 @@ class Game
     puts player_initial_prompt
     answer = gets.chomp
   end
+
+  def play_game
+    player_initial_prompt
+    grab_cell_addresses
+  end
 end
 
 game = Game.new
