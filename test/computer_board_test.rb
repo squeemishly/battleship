@@ -3,63 +3,70 @@ require 'Minitest/pride'
 require './lib/computer_board'
 
 class ComputerBoardTest < Minitest::Test
-  def setup
-    @board = ComputerBoard.new
-  end
-
   def test_it_exists
-    assert_instance_of ComputerBoard, @board
+    board = ComputerBoard.new
+    assert_instance_of ComputerBoard, board
   end
 
   def test_it_access_the_ocean
-    assert_instance_of Ocean, @board.ocean
+    board = ComputerBoard.new
+    assert_instance_of Ocean, board.ocean
   end
 
-  def test_can_generate_random_start
-    assert_instance_of Array, @board.random_start
-    assert_equal 2, @board.random_start.length
+  def test_it_can_add_a_double_ship
+    board = ComputerBoard.new
+    assert_equal "ship", board.place_ship
   end
 
-  def test_it_can_determine_a_direction_to_place_the_ship
-    @board.random_start
-    direction = ["N", "E", "S", "W"]
-    assert direction.include?(@board.determine_direction)
+  def test_it_can_add_a_triple_ship
+    board = ComputerBoard.new(3)
+    assert_equal "ship", board.place_ship
   end
-
-  def test_find_a_random_adjacent_cell
-    @board.random_start
-    @board.adjacent_cell
-    assert_instance_of Array, @board.ship_range
-    assert_equal 1, @board.ship_range.length
-  end
-
-  def test_it_can_find_two_adjacent_cells
-    @board.random_start
-    @board.adjacent_cell(3)
-    assert_instance_of Array, @board.ship_range
-    assert_equal 2, @board.ship_range.length
-  end
-
-  def test_it_can_merge_starting_cell_and_adjacent_cells
-    @board.random_start
-    @board.adjacent_cell
-    assert_instance_of Array, @board.create_ship
-    assert_equal 2, @board.create_ship.length
-  end
-
-  def test_it_can_make_a_3_peg_boat
-    @board.random_start
-    @board.adjacent_cell(3)
-    assert_instance_of Array, @board.create_ship
-    assert_equal 3, @board.create_ship.length
-  end
-
-  def test_it_can_validate_that_all_cells_are_on_the_board
-    @board.random_start
-    @board.adjacent_cell(3)
-    @board.create_ship
-    assert_equal "", @board.validate_cells
-  end
+  # def test_can_generate_random_start
+  #   assert_instance_of Array, @board.random_start
+  #   assert_equal 2, @board.random_start.length
+  # end
+  #
+  # def test_it_can_determine_a_direction_to_place_the_ship
+  #   @board.random_start
+  #   direction = ["N", "E", "S", "W"]
+  #   assert direction.include?(@board.determine_direction)
+  # end
+  #
+  # def test_find_a_random_adjacent_cell
+  #   @board.random_start
+  #   @board.adjacent_cell
+  #   assert_instance_of Array, @board.ship_range
+  #   assert_equal 1, @board.ship_range.length
+  # end
+  #
+  # def test_it_can_find_two_adjacent_cells
+  #   @board.random_start
+  #   @board.adjacent_cell(3)
+  #   assert_instance_of Array, @board.ship_range
+  #   assert_equal 2, @board.ship_range.length
+  # end
+  #
+  # def test_it_can_merge_starting_cell_and_adjacent_cells
+  #   @board.random_start
+  #   @board.adjacent_cell
+  #   assert_instance_of Array, @board.create_ship
+  #   assert_equal 2, @board.create_ship.length
+  # end
+  #
+  # def test_it_can_make_a_3_peg_boat
+  #   @board.random_start
+  #   @board.adjacent_cell(3)
+  #   assert_instance_of Array, @board.create_ship
+  #   assert_equal 3, @board.create_ship.length
+  # end
+  #
+  # def test_it_can_validate_that_all_cells_are_on_the_board
+  #   @board.random_start
+  #   @board.adjacent_cell(3)
+  #   @board.create_ship
+  #   assert_equal "", @board.validate_cells
+  # end
 
   # def test_it_knows_which_adjacent_cells_are_valid
   #   adjacent_cell = @board.adjacent_cell(2, "A1")
