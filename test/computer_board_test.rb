@@ -15,56 +15,61 @@ class ComputerBoardTest < Minitest::Test
     assert_instance_of Ocean, @board.ocean
   end
 
-  # def test_it_can_validate_ship_placement
-  #   assert @board.validate_ship_placement("A1", "A2")
-  #   refute @board.validate_ship_placement("A1", "B3")
-  # end
-
-  # def test_it_can_place_a_2_piece_ship
-  #   assert_equal "ship", @board.place_2_piece_ship("A1", "A2")
-  #   refute @board.place_2_piece_ship("A1", "B3")
-  # end
-
   def test_can_generate_random_start
-    # skip
-    assert_instance_of String, @board.random_start
+    assert_instance_of Array, @board.random_start
     assert_equal 2, @board.random_start.length
   end
 
+  def test_it_can_determine_a_direction_to_place_the_ship
+    @board.random_start
+    direction = ["N", "E", "S", "W"]
+    assert direction.include?(@board.determine_direction)
+  end
+
   def test_find_a_random_adjacent_cell
-    assert_equal [[64, 0], [64, 1], [64, 2], [65, 0], [65, 1], [65, 2], [66, 0], [66, 1], [66, 2]], @board.adjacent_cell("A1")
+    @board.random_start
+    @board.adjacent_cell
+    assert_instance_of Array, @board.ship_range
+    assert_equal 1, @board.ship_range.length
   end
 
-  def test_it_knows_which_adjacent_cells_are_valid
-    adjacent_cell = @board.adjacent_cell("A1")
-    assert_equal [[65, 1], [65, 2], [66, 1], [66, 2]], @board.validate_options(adjacent_cell)
+  def test_it_can_find_two_adjacent_cells
+    @board.random_start
+    @board.adjacent_cell(3)
+    assert_instance_of Array, @board.ship_range
+    assert_equal 2, @board.ship_range.length
   end
 
-  def test_it_removes_values_that_match_the_starting_cell
-    # skip
-    adjacent_cell = @board.adjacent_cell("A1")
-    validate = @board.validate_options(adjacent_cell)
-    assert_equal [[65, 2], [66, 1], [66, 2]], @board.remove_starting_cell(validate, "A1")
-    assert_equal [[65, 2], [66, 1], [66, 2]], @board.remove_starting_cell([[65, 1], [65, 2], [66, 1], [66, 2]], "A1")
-  end
-
-  def test_it_picks_a_random_cell_from_the_valid_cells
-    adjacent_cell = @board.adjacent_cell("A1")
-    validate = @board.validate_options(adjacent_cell)
-    @board.remove_starting_cell(validate, "A1")
-    assert_equal 2, @board.pick_adjacent_cell.length
-    assert_instance_of Array, @board.pick_adjacent_cell
-  end
-
-
-  def test_it_merges_the_cells_to_valid_addresses
-    skip
-    @board.remove_starting_cell(@board.validate_options(@board.adjacent_cell("A1")), "A1")
-    assert_equal 2, @board.merged_adjacent_cell.length
-    assert_instance_of String, @board.merged_adjacent_cell
-  end
-
-  def test_it_can_automate_ship_placement
-  end
+  # def test_it_knows_which_adjacent_cells_are_valid
+  #   adjacent_cell = @board.adjacent_cell(2, "A1")
+  #   assert_equal [[65, 1], [65, 2], [66, 1], [66, 2]], @board.validate_options(adjacent_cell)
+  # end
+  #
+  # def test_it_removes_values_that_match_the_starting_cell
+  #   # skip
+  #   adjacent_cell = @board.adjacent_cell(2, "A1")
+  #   validate = @board.validate_options(adjacent_cell)
+  #   assert_equal [[65, 2], [66, 1], [66, 2]], @board.remove_starting_cell(validate, "A1")
+  #   assert_equal [[65, 2], [66, 1], [66, 2]], @board.remove_starting_cell([[65, 1], [65, 2], [66, 1], [66, 2]], "A1")
+  # end
+  #
+  # def test_it_picks_a_random_cell_from_the_valid_cells
+  #   adjacent_cell = @board.adjacent_cell(2, "A1")
+  #   validate = @board.validate_options(adjacent_cell)
+  #   @board.remove_starting_cell(validate, "A1")
+  #   assert_equal 2, @board.pick_adjacent_cell.length
+  #   assert_instance_of Array, @board.pick_adjacent_cell
+  # end
+  #
+  #
+  # def test_it_merges_the_cells_to_valid_addresses
+  #   skip
+  #   @board.remove_starting_cell(@board.validate_options(@board.adjacent_cell("A1")), "A1")
+  #   assert_equal 2, @board.merged_adjacent_cell.length
+  #   assert_instance_of String, @board.merged_adjacent_cell
+  # end
+  #
+  # def test_it_can_automate_ship_placement
+  # end
 
 end
